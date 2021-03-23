@@ -25,12 +25,24 @@ function AddThemeInForm() {
  */
 function StartQuizz() {
     let value = $("#theme").val();
+    $("#formtheme").hide();
     return value;
+}
+
+
+//HEEEEEEEEEEEEEELP
+function DisplayTitle(val){
+    $("main").append('<h3>'+ quizzes[val].title +'</h3>')
+}
+
+function test(val) {
+    console.log(Object.keys(quizzes)[val]);
 }
 
 $(document).ready(function () {
     AddThemeInForm();
     $("#start").click(function(){
         let valeur = StartQuizz();
+        DisplayTitle();
     })
 }) 
