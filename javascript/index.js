@@ -4,7 +4,7 @@
  */
 function ListCMD() {
     for (const key in quizzes) {
-        console.log(key + " - " + quizzes[key].title)
+        console.log(key + " - " + quizzes[key].title);
     }
 }
 
@@ -29,20 +29,28 @@ function StartQuizz() {
     return value;
 }
 
-
 //HEEEEEEEEEEEEEELP
 function DisplayTitle(val){
-    $("main").append('<h3>'+ quizzes[val].title +'</h3>')
-}
-
-function test(val) {
-    console.log(Object.keys(quizzes)[val]);
+    switch(val){
+        case '0':
+            $("main").append('<h3>'+ quizzes.mer.title +'</h3>');
+            break;
+        case '1':
+            $("main").append('<h3>'+ quizzes.jeux.title +'</h3>');
+            break;
+        case '2':
+            $("main").append('<h3>'+ quizzes.couples.title +'</h3>');
+            break;
+        case '3':
+            $("main").append('<h3>'+ quizzes.webg2.title +'</h3>');
+            break;            
+    }
 }
 
 $(document).ready(function () {
     AddThemeInForm();
     $("#start").click(function(){
         let valeur = StartQuizz();
-        DisplayTitle();
+        DisplayTitle(valeur);
     })
 }) 
