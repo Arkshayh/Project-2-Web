@@ -29,9 +29,9 @@ function StartQuizz() {
     return value;
 }
 
-//HEEEEEEEEEEEEEELP
-function DisplayTitle(val){
-    switch(val){
+
+function DisplayTitle(){
+    switch(valeur){
         case '0':
             $("main").append('<h2>'+ quizzes.mer.title +'</h2>');
             $("main").append('<h3>'+ quizzes.mer.description +'</h3>');
@@ -64,13 +64,16 @@ function saveVal() {
     localStorage.setItem("valeur", valeur); 
 }
 
+function openQuizzPage() {
+    window.open("quizz.html","_self");
+}
+
 $(document).ready(function () {
     AddThemeInForm();
     loadVal();
     $("#start").click(function(){
         valeur = StartQuizz();
         saveVal();
-        loadQuizz();
-        //DisplayTitle(valeur);
+        openQuizzPage();
     })
 }) 
