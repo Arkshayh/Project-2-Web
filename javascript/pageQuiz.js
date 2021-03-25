@@ -19,6 +19,10 @@ function DisplayTitle(){
     }
 }
 
+
+function displayQuizz() {
+}
+
 $(document).ready(function () {
     loadVal();
     DisplayTitle(valeur);
