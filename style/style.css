@@ -1,6 +1,7 @@
 header{
     color: white;
     text-align: center;
+    text-decoration: underline;
 }
 main{
     text-align: center;
@@ -12,6 +13,7 @@ h2{
     padding-top: 0px;margin-top: 10px;
 }
 body{
+    font-family: sans-serif;
     background-color: rgb(97, 124, 148);
 }
 h3{

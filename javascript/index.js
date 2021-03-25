@@ -33,24 +33,44 @@ function StartQuizz() {
 function DisplayTitle(val){
     switch(val){
         case '0':
-            $("main").append('<h3>'+ quizzes.mer.title +'</h3>');
+            $("main").append('<h2>'+ quizzes.mer.title +'</h2>');
+            $("main").append('<h3>'+ quizzes.mer.description +'</h3>');
             break;
         case '1':
-            $("main").append('<h3>'+ quizzes.jeux.title +'</h3>');
+            $("main").append('<h2>'+ quizzes.jeux.title +'</h2>');
+            $("main").append('<h3>'+ quizzes.jeux.description +'</h3>');
             break;
         case '2':
-            $("main").append('<h3>'+ quizzes.couples.title +'</h3>');
+            $("main").append('<h2>'+ quizzes.couples.title +'</h2>');
+            $("main").append('<h3>'+ quizzes.couples.description +'</h3>');
             break;
         case '3':
-            $("main").append('<h3>'+ quizzes.webg2.title +'</h3>');
+            $("main").append('<h2>'+ quizzes.webg2.title +'</h2>');
+            $("main").append('<h3>'+ quizzes.webg2.description +'</h3>');
             break;            
     }
 }
 
+let valeur = null;
+
+function loadVal() {
+    valeur = localStorage.getItem("valeur");
+    if(! valeur) {
+        valeur = 0;
+    }
+}
+
+function saveVal() {
+    localStorage.setItem("valeur", valeur); 
+}
+
 $(document).ready(function () {
     AddThemeInForm();
+    loadVal();
     $("#start").click(function(){
-        let valeur = StartQuizz();
-        DisplayTitle(valeur);
+        valeur = StartQuizz();
+        saveVal();
+        loadQuizz();
+        //DisplayTitle(valeur);
     })
 }) 
