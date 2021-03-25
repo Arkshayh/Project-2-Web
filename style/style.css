@@ -1,5 +1,5 @@
 header{
-    color: white;
+    color: rgb(201, 0, 0);
     text-align: center;
     text-decoration: underline;
 }
@@ -14,7 +14,7 @@ h2{
 }
 body{
     font-family: sans-serif;
-    background-color: rgb(97, 124, 148);
+    background-color: rgb(117, 140, 160);
 }
 h3{
     color: white;

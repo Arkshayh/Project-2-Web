@@ -30,29 +30,10 @@ function StartQuizz() {
 }
 
 
-function DisplayTitle(){
-    switch(valeur){
-        case '0':
-            $("main").append('<h2>'+ quizzes.mer.title +'</h2>');
-            $("main").append('<h3>'+ quizzes.mer.description +'</h3>');
-            break;
-        case '1':
-            $("main").append('<h2>'+ quizzes.jeux.title +'</h2>');
-            $("main").append('<h3>'+ quizzes.jeux.description +'</h3>');
-            break;
-        case '2':
-            $("main").append('<h2>'+ quizzes.couples.title +'</h2>');
-            $("main").append('<h3>'+ quizzes.couples.description +'</h3>');
-            break;
-        case '3':
-            $("main").append('<h2>'+ quizzes.webg2.title +'</h2>');
-            $("main").append('<h3>'+ quizzes.webg2.description +'</h3>');
-            break;            
-    }
-}
-
+//Value who will be save and usefull to load the quizz question on the quizz.html page
 let valeur = null;
 
+//Load valeur 
 function loadVal() {
     valeur = localStorage.getItem("valeur");
     if(! valeur) {
@@ -60,10 +41,12 @@ function loadVal() {
     }
 }
 
+//Save valeur
 function saveVal() {
     localStorage.setItem("valeur", valeur); 
 }
 
+//Will load the quizz page 
 function openQuizzPage() {
     window.open("quizz.html","_self");
 }
