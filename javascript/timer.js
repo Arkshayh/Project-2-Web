@@ -6,6 +6,7 @@ function display() {
         if(time == 0){
             clearInterval(timer);
             $("#timer").hide();
+            displayQuizz();
         }
     }, 1000);
 }
