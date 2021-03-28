@@ -1,39 +1,8 @@
 function DisplayTitle(){
-     $("main").append('<h2>'+ quizzes.mer.title +'</h2>');
-    switch(valeur){
-        case 'mer':
-            $("main").append('<h2>'+ quizzes.mer.title +'</h2>');
-            $("main").append('<h3>'+ quizzes.mer.description +'</h3>');
-            break;
-        case 'jeux':
-            $("main").append('<h2>'+ quizzes.jeux.title +'</h2>');
-            $("main").append('<h3>'+ quizzes.jeux.description +'</h3>');
-            break;
-        case 'couples':
-            $("main").append('<h2>'+ quizzes.couples.title +'</h2>');
-            $("main").append('<h3>'+ quizzes.couples.description +'</h3>');
-            break;
-        case 'webg2':
-            $("main").append('<h2>'+ quizzes.webg2.title +'</h2>');
-            $("main").append('<h3>'+ quizzes.webg2.description +'</h3>');
-            break;            
-    }
+     $("main").append('<h2>'+ quizzes[valeur].title +'</h2>');
+     $("main").append('<h3>'+ quizzes[valeur].description +'</h3>');
 }
 
-//Utiliser quizzes2
-function displayQuizz() {
-    switch(valeur){
-        case '0':
-            displayMer();
-            break;
-        case '1':
-            break;
-        case '2':
-            break;
-        case '3':
-            break;
-    }
-}
 
 function displayMer() {
     let tab = quizzes.mer.data
