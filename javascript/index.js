@@ -12,10 +12,8 @@ function ListCMD() {
  * add each theme in the form
  */
 function AddThemeInForm() {
-    let value = 0;
     for (const key in quizzes) {
-        $("#theme").append('<option value="'+value+'">'+ quizzes[key].title +'</option>');
-        value++;
+        $("#theme").append('<option value="'+key+'">'+ quizzes[key].title +'</option>');
     }
 }
 
@@ -37,7 +35,7 @@ let valeur = null;
 function loadVal() {
     valeur = localStorage.getItem("valeur");
     if(! valeur) {
-        valeur = 0;
+        valeur = null;
     }
 }
 
