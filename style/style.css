@@ -3,19 +3,29 @@ header{
     text-align: center;
     text-decoration: underline;
 }
-main{
-    text-align: center;
-}
 h2{
+    text-align: center;
     color: white;
 }
+
+h3{
+    text-align: center;
+    color: white;
+}
+
+#formtheme{
+    text-align: center;
+}
+
 #start{
     padding-top: 0px;margin-top: 10px;
 }
+
+#timer{
+    text-align: center;
+}
+
 body{
     font-family: sans-serif;
     background-color: rgb(117, 140, 160);
-}
-h3{
-    color: white;
 }
