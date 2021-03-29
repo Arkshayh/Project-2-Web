@@ -3,12 +3,19 @@ function DisplayTitle(){
      $("main").append('<h3>'+ quizzes[valeur].description +'</h3>');
 }
 
-function displayQuizz() {
-    let tabThem = quizzes[valeur].data;
+function displayQuestionInConsole(tabThem) {
     for(let i = 0; i < tabThem.length; i++){
         console.log(tabThem[i].question);
     }
-    console.log("yo")
+}
+
+function displayQuizz() {
+    let tabThem = quizzes[valeur].data; 
+    displayQuestionInConsole(tabThem); //Affichage question dans console
+
+    $("main").append('<div id="QuestionReponse"></div>');
+
+    $("#QuestionReponse").append('<img src="'+tabThem[0].image+'"alt="image">')
 }
 
 $(document).ready(function () {
