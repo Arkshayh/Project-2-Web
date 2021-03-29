@@ -3,19 +3,12 @@ function DisplayTitle(){
      $("main").append('<h3>'+ quizzes[valeur].description +'</h3>');
 }
 
-
-function displayMer() {
-    let tab = quizzes.mer.data
-    for(let i = 0; i < tab.length;i++){
-        console.log(tab[i].question)
+function displayQuizz() {
+    let tabThem = quizzes[valeur].data;
+    for(let i = 0; i < tabThem.length; i++){
+        console.log(tabThem[i].question);
     }
-}
-
-function displayMerConsole() {
-    let tab = quizzes.mer.data
-    for(let i = 0; i < tab.length;i++){
-        console.log(tab[i].question)
-    }
+    console.log("yo")
 }
 
 $(document).ready(function () {
