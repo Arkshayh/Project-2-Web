@@ -34,8 +34,14 @@ function displayQuizz() {
         tabRep = tabThem[i].reponses;
     
         for(let j = 0; j < tabRep.length;j++){
-            $("#Question"+val).append('<div class ="Reponse"> <input type="radio" id ="'+ tabRep[j] +'" name="choix'+ i +'" value="'+
+            if(j == 0){
+                $("#Question"+val).append('<div class ="Reponse"> <input type="radio" id ="'+ tabRep[j] +'" name="choix'+ i +'" value="'+
+             j +'" checked> <label for="'+ tabRep[j] +'">'+ tabRep[j] +'</label> </div>');
+            }
+            else{
+                $("#Question"+val).append('<div class ="Reponse"> <input type="radio" id ="'+ tabRep[j] +'" name="choix'+ i +'" value="'+
              j +'"> <label for="'+ tabRep[j] +'">'+ tabRep[j] +'</label> </div>');
+            }
         }
         $("#QuestionReponse").append('<br>');
         

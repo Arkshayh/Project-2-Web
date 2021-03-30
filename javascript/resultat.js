@@ -25,35 +25,34 @@ function gotAnswer(tab){
     return answer;
 }
 
+function gotTrueResult(){
+    let res = [];
+    for(let i = 0; i < resultat.length; i++){
+        if(i%2==0){
+            res.push(resultat[i]);
+        }
+    }
+    return res
+}
+
 function DisplayQuestionAndAnswer(){
     let tabData = quizzes[valeur].data; 
     let correction = gotAnswer(tabData);
+    let res = gotTrueResult();
 
     $("main").append('<div id = "result"></div>');
+    
 
     for(let i = 0; i < tabData.length;i++){
-
-        if(i%2==0){
-            $("#result").append('<p>'+ (i+1) +') '+ tabData[i].question +' Vous avez répondu : '+ tabData[i].reponses[resultat[i]] +'</p>');
-            console.log(resultat[i]);
-            if(resultat[i] == correction[0]){
-                $("#result").append('<p class = "true"> Bravo, vous avez trouvé la bonne réponse !')
-            }
-            else{
-                $("#result").append('<p class = "false"> Dommage, la bonne réponse était : ' + tabData[i].reponses[correction[i]])
-            }
+       
+        $("#result").append('<p>'+ (i+1) +') '+ tabData[i].question +' Vous avez répondu : '+ tabData[i].reponses[res[i]] +'</p>');
+        if(res[i] == correction[i]){
+            $("#result").append('<p class = "true"> Bravo, vous avez trouvé la bonne réponse !')
         }
-        
         else{
-            console.log(resultat[i+1]);
-            $("#result").append('<p>'+ (i+1) +') '+ tabData[i].question +' Vous avez répondu : '+ tabData[i].reponses[resultat[i+1]] +'</p>');
-            if(resultat[i+1] == correction[0]){
-                $("#result").append('<p class = "true"> Bravo, vous avez trouvé la bonne réponse !')
-            }
-            else{
-                $("#result").append('<p class = "false"> Dommage, la bonne réponse était : ' + tabData[i].reponses[correction[i]])
-            }
+            $("#result").append('<p class = "false"> Dommage, la bonne réponse était : ' + tabData[i].reponses[correction[i]])
         }
+
     }
 }
 
