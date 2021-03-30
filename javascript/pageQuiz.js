@@ -50,17 +50,6 @@ function displayQuizz() {
 
 }
 
-/**
- * Renvoie un tableau avec l'emplacement de chaque bonne réponse (cas où nb bonne rep = 1)
- * @returns tab avec l'emplacement de chaque bonne réponse pour chaque question (cas où une seule bonne réponse)
- */
-function tabBonneRep() {
-    let tableauBonneRéponse = [];
-    for(let i = 0;i < quizzes[valeur].data.length;i++){
-        tableauBonneRéponse.push(quizzes[valeur].data[i].bonneReponses[0]); //[0] car pour les cas où 1 bonne rep
-    }
-    return tableauBonneRéponse;
-}
 
 function tabRepChecked() {
     let tabRep = [];
@@ -75,8 +64,6 @@ function tabRepChecked() {
 }
 
 function verification() {
-    let tableauBonneRéponse = tabBonneRep();
-    console.log(tableauBonneRéponse)
     let tabRep = tabRepChecked();
     console.log(tabRep);
 

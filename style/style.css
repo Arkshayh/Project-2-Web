@@ -29,3 +29,11 @@ body{
     font-family: sans-serif;
     background-color: rgb(117, 140, 160);
 }
+
+.true{
+    color: rgb(0, 196, 0);
+}
+
+.false{
+    color: red;
+}
