@@ -1,3 +1,5 @@
+let valeur = localStorage.getItem('valeur');
+
 function DisplayTitle(){
      $("main").append('<h2>'+ quizzes[valeur].title +'</h2>');
      $("main").append('<h3>'+ quizzes[valeur].description +'</h3>');
@@ -40,6 +42,11 @@ function displayQuizz() {
     }
 
     $("main").append('<button id="verification">Vérification</button>')
+    $("#verification").click(function(){
+        let resultat = verification();
+        localStorage.setItem("res", resultat);
+        openResultatPage();
+    })
 
 }
 
@@ -76,19 +83,6 @@ function verification() {
     return tabRep;
 }
 
-let resultat = null;
-
-function loadRes() {
-    resultat = localStorage.getItem("resultat");
-    if(! resultat) {
-        valeur = null;
-    }
-}
-
-//Save resulat
-function saveRes() {
-    localStorage.setItem("resultat", resultat); 
-}
 
 //Will load the resultat page 
 function openResultatPage() {
@@ -96,11 +90,5 @@ function openResultatPage() {
 }
 
 $(document).ready(function () {
-    loadVal();
     DisplayTitle(valeur);
-    $("#verification").click(function(){
-        resultat = verification();
-        saveRes();
-        openResultatPage();
-    })
 }) 

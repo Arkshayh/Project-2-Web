@@ -27,18 +27,6 @@ function StartQuizz() {
     return value;
 }
 
-
-//Value who will be save and usefull to load the quizz question on the quizz.html page
-let valeur = null;
-
-//Load valeur 
-function loadVal() {
-    valeur = localStorage.getItem("valeur");
-    if(! valeur) {
-        valeur = null;
-    }
-}
-
 //Save valeur
 function saveVal() {
     localStorage.setItem("valeur", valeur); 
@@ -51,7 +39,6 @@ function openQuizzPage() {
 
 $(document).ready(function () {
     AddThemeInForm();
-    loadVal();
     $("#start").click(function(){
         valeur = StartQuizz();
         saveVal();
