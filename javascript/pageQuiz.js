@@ -17,32 +17,19 @@ let multipleAnswer = false;
 //Will check if the quizz chosen has multiple answer if it's the case let multipleAnswer -> true 
 function countAnswer(){
     let tabData1 = quizzes[valeur].data; 
-    let nbQuestion = 0;
-    let nbAnswer = [];
     for(let i =0; i < tabData1.length;i++){
-        nbQuestion++;
-        nbAnswer.push(tabData1[i].question);
+        if(tabData1[i].bonneReponses.length > 1){
+            multipleAnswer = true;
+        }
     }
-    if(nbQuestion != nbAnswer.length){
-        multipleAnswer = true;
-    }
-    console.log(multipleAnswer);
+    console.log("Y a t'il plusieurs réponses possible ? " + multipleAnswer);
 
 }
 
-function displayQuizz() {
-    //Check si quizz à choix multiple.
-    countAnswer();
-
-    //Tableau avec toutes les données du quizz sélectionné.
-    let tabThem = quizzes[valeur].data; 
+function displayQuizzUniqueAnswer(tabThem){
 
     let tabRep;
     let val;
-
-    displayQuestionInConsole(tabThem); //Affichage question dans console
-
-    $("main").append('<div id="QuestionReponse"></div>');
 
     for(let i = 0; i < tabThem.length; i++){
 
@@ -66,6 +53,28 @@ function displayQuizz() {
         }
         $("#QuestionReponse").append('<br>');
         
+    }
+}
+
+function displayQuizzMultipleAnswer(tabThem){
+
+}
+
+function displayQuizz() {
+    //Check si quizz à choix multiple.
+    countAnswer();
+
+    let tabThem = quizzes[valeur].data; 
+
+    displayQuestionInConsole(tabThem); //Affichage question dans console
+
+    $("main").append('<div id="QuestionReponse"></div>');
+
+    if(multipleAnswer == false){
+        displayQuizzUniqueAnswer(tabThem);
+    }
+    else{
+        displayQuizzMultipleAnswer();
     }
 
     $("main").append('<button id="verification">Vérification</button>')
