@@ -11,10 +11,31 @@ function displayQuestionInConsole(tabThem) {
     }
 }
 
+//Tell if the quizz chosen has multiple answer or not
+let multipleAnswer = false;
+
+//Will check if the quizz chosen has multiple answer if it's the case let multipleAnswer -> true 
+function countAnswer(){
+    let tabData1 = quizzes[valeur].data; 
+    let nbQuestion = 0;
+    let nbAnswer = [];
+    for(let i =0; i < tabData1.length;i++){
+        nbQuestion++;
+        nbAnswer.push(tabData1[i].question);
+    }
+    if(nbQuestion != nbAnswer.length){
+        multipleAnswer = true;
+    }
+    console.log(multipleAnswer);
+
+}
+
 function displayQuizz() {
+    //Check si quizz à choix multiple.
+    countAnswer();
+
     //Tableau avec toutes les données du quizz sélectionné.
     let tabThem = quizzes[valeur].data; 
-
 
     let tabRep;
     let val;
