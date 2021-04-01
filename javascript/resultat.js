@@ -1,6 +1,9 @@
 let resultat = localStorage.getItem('res');
 let valeur = localStorage.getItem('valeur');
 
+//"true" = multi  "false" = single
+let typeQuizz = localStorage.getItem('typeOfQuizz');
+
 function DisplaySubTitle(){
     $("main").append('<h2>Correction</h2>');
 }

@@ -95,9 +95,11 @@ function displayQuizz() {
         if(multipleAnswer == false){
             let resultat = verification();
             localStorage.setItem("res", resultat);
+            localStorage.setItem("typeOfQuizz", multipleAnswer);
             openResultatPage();
         }
         else{
+            localStorage.setItem("typeOfQuizz", multipleAnswer);
             let bonneRep = getBonneReponse(tabThem);
             let enough = checking(bonneRep);
             if(enough == false){
