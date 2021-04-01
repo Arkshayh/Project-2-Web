@@ -1,13 +1,17 @@
 //Tell if the quizz chosen has multiple answer or not
 let multipleAnswer = false;
+//Will get the item save as "valeur" to load the good quizz question
 let valeur = localStorage.getItem('valeur');
 
+//Will display the title of the quizz and its description
 function DisplayTitle(){
      $("main").append('<h2>'+ quizzes[valeur].title +'</h2>');
      $("main").append('<h3>'+ quizzes[valeur].description +'</h3>');
 }
 
-function displayQuestionInConsole(tabThem) {
+//Display the question of the quizz chosen in the console
+function displayQuestionInConsole() {
+    let tabThem = quizzes[valeur].data;
     for(let i = 0; i < tabThem.length; i++){
         console.log(tabThem[i].question);
     }
@@ -21,12 +25,10 @@ function countAnswer(){
             multipleAnswer = true;
         }
     }
-    console.log("Y a t'il plusieurs réponses possible ? " + multipleAnswer);
-
 }
 
+// /!\ FOR QUIZZ WITH ONE ANSWER PER QUESTION : For each question will display the question and its answer 
 function displayQuizzUniqueAnswer(tabThem){
-
     let tabRep;
     let val;
 
@@ -55,6 +57,7 @@ function displayQuizzUniqueAnswer(tabThem){
     }
 }
 
+// /!\ FOR QUIZZ WITH MORE THAN ONE ANSWER PER QUESTION : For each question will display the question and its answer 
 function displayQuizzMultipleAnswer(tabThem){
     let tabRep;
     let val;
@@ -73,13 +76,12 @@ function displayQuizzMultipleAnswer(tabThem){
     }
 }
 
+//Will display the entire page.
 function displayQuizz() {
     //Check si quizz à choix multiple.
     countAnswer();
 
     let tabThem = quizzes[valeur].data; 
-
-    displayQuestionInConsole(tabThem); //Affichage question dans console
 
     $("main").append('<div id="QuestionReponse"></div>');
 
@@ -115,6 +117,11 @@ function displayQuizz() {
 
 }
 
+/**
+ * Checks if the number of answers checked per question is sufficient
+ * @param {*} bonneRep //table with all the correct answers
+ * @returns boolean True if the number of answers checked for each question is correct
+ */
 function checking(bonneRep){
     let enough = true;
     let count = 0;
@@ -132,6 +139,7 @@ function checking(bonneRep){
     return enough;
 }
 
+
 function getMultpleAnswer(tabThem){
     let checked = [];
     for(let i =0; i< tabThem.length;i++){
@@ -144,6 +152,11 @@ function getMultpleAnswer(tabThem){
     return checked;
 }
 
+/**
+ * 
+ * @param {*} tabThem //table with all data
+ * @returns //table with all the correct answers
+ */
 function getBonneReponse(tabThem){
     let bonneRep = [];
     for(let i =0; i< tabThem.length;i++){
