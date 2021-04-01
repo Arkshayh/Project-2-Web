@@ -110,8 +110,6 @@ function displayQuizz() {
                 localStorage.setItem("res", userAnswer);
                 openResultatPage();
             }
-
-            console.log("à faire");
         }
     })
 
@@ -143,6 +141,7 @@ function getMultpleAnswer(tabThem){
             }
         })
     }
+    return checked;
 }
 
 function getBonneReponse(tabThem){
