@@ -27,16 +27,17 @@ function StartQuizz() {
     return value;
 }
 
-//Save valeur
+//Save as valeur the value of the quizz chosen
 function saveVal() {
     localStorage.setItem("valeur", valeur); 
 }
 
-//Will load the quizz page 
+//Will open a new page who will load the quizz chosen 
 function openQuizzPage() {
     window.open("quizz.html","_self");
 }
 
+//Execute will the current page is loaded
 $(document).ready(function () {
     AddThemeInForm();
     $("#start").click(function(){
