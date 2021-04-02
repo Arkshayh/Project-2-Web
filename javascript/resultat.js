@@ -1,7 +1,9 @@
+//The answer from the user (',' must be remove the be usable)
 let resultat = localStorage.getItem('res');
+//Valeur = Mer (0) / Couples /...
 let valeur = localStorage.getItem('valeur');
 
-//"true" = multi  "false" = single
+//"true" = multi  "false" = single answer
 let typeQuizz = localStorage.getItem('typeOfQuizz');
 
 function DisplaySubTitle(){
@@ -20,6 +22,11 @@ function DisplaySubTitle(){
     return tableauBonneRéponse;
 }
 
+/**
+ * Return a table with the correct answers
+ * @param {*} tab table with the data of the quizz chosen
+ * @returns table with the correct answers
+ */
 function gotAnswer(tab){
     let answer = [];
     for(let j = 0; j < tab.length;j++){
@@ -28,6 +35,10 @@ function gotAnswer(tab){
     return answer;
 }
 
+/**
+ * Remove the ',' from the table with your answers
+ * @returns a table with your answers
+ */
 function gotTrueResult(){
     let res = [];
     for(let i = 0; i < resultat.length; i++){
@@ -38,6 +49,10 @@ function gotTrueResult(){
     return res
 }
 
+/**
+ * /!\ FOR QUIZZ  ONE ANSWER PER QUESTION
+ * Display the question + the image of this question + your answers + the correction
+ */
 function DisplayQuestionAndAnswer(){
     let tabData = quizzes[valeur].data; 
     let correction = gotAnswer(tabData);
@@ -49,6 +64,7 @@ function DisplayQuestionAndAnswer(){
     for(let i = 0; i < tabData.length;i++){
        
         $("#result").append('<p>'+ (i+1) +') '+ tabData[i].question +' Vous avez répondu : '+ tabData[i].reponses[res[i]] +'</p>');
+        $("#result").append('<img src="'+tabData[i].image+'"alt="image">'); 
         if(res[i] == correction[i]){
             $("#result").append('<p class = "true"> Bravo, vous avez trouvé la bonne réponse !')
         }
@@ -59,6 +75,10 @@ function DisplayQuestionAndAnswer(){
     }
 }
 
+/**
+ * /!\ FOR QUIZZ WITH MORE THAN ONE ANSWER PER QUESTION
+ * Display the question + the image of this question + your answers + the correction
+ */
 function DisplayResultatMultipleAnswer(){
     let tabData = quizzes[valeur].data;
     let correction = gotAnswer(tabData);
@@ -66,10 +86,6 @@ function DisplayResultatMultipleAnswer(){
     let nbRepQuestion = 0;
     let equals = true;
     let showingAnswer = [];
-
-    console.log(tabData);
-    console.log(correction);
-    console.log(UserRep);
 
     let currentRep;
     let currentUserRep = [];
@@ -110,6 +126,9 @@ function DisplayResultatMultipleAnswer(){
     
 }
 
+/**
+ * when the page is load, display the title/Subtitle + your answers and the correction
+ */
 $(document).ready(function () {
     DisplaySubTitle();
     if(typeQuizz == "false"){
