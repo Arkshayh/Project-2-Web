@@ -17,6 +17,7 @@ function displayQuestionInConsole() {
     }
 }
 
+
 //Will check if the quizz chosen has multiple answer if it's the case let multipleAnswer -> true 
 function countAnswer(){
     let tabData1 = quizzes[valeur].data; 
@@ -25,6 +26,96 @@ function countAnswer(){
             multipleAnswer = true;
         }
     }
+}
+
+/**
+ * This function is only executed for quizzes with multiple answers per question
+ * Checks if the number of answers checked per question is sufficient
+ * @param {*} bonneRep //table with all the correct answers
+ * @returns boolean True if the number of answers checked for each question is correct
+ */
+function checking(bonneRep){
+    let enough = true;
+    let count = 0;
+    for(let i = 0; i < bonneRep.length;i++){
+        document.getElementsByName('choix'+i).forEach(checkbox => {
+            if(checkbox.checked){
+                count++;
+            }
+        })
+        if(bonneRep[i].length != count){
+            enough = false;
+        }
+        count = 0;
+    }
+    return enough;
+}
+
+/**
+ * This function is only executed for quizzes with multiple answers per questions
+ * Place in a table all the answers that the user has to check and return it. 
+ * @param {*} tabThem table with the data of the quizz chosen
+ * @returns tavble with the answers checked by the user
+ */
+function getMultpleAnswer(tabThem){
+    let checked = [];
+    for(let i =0; i< tabThem.length;i++){
+        document.getElementsByName('choix'+i).forEach(checkbox => {
+            if(checkbox.checked){
+                checked.push(checkbox.value);
+            }
+        })
+    }
+    return checked;
+}
+
+/**
+ * This function is only executed for quizzes with multiple answers per question
+ * Place in a table all the correct answers of the chosen quiz (these are represented as a number)
+ * @param {*} tabThem //table with all data about the quizz chosen
+ * @returns //table with all the correct answers
+ */
+function getBonneReponse(tabThem){
+    let bonneRep = [];
+    for(let i =0; i< tabThem.length;i++){
+        bonneRep.push(tabThem[i].bonneReponses);
+    }
+    return bonneRep;
+
+}
+
+/**
+ * This function is only executed for quizzes with 1 answers per question
+ * Place in a table all the answers that the user has to check and return it. 
+ * @returns Place in a table all the answers that the user has to check and return it. 
+ */
+function tabRepChecked() {
+    let tabRep = [];
+    for(let i = 0;i < quizzes[valeur].data.length;i++){
+        document.getElementsByName('choix'+i).forEach(radio => {
+            if(radio.checked){
+                tabRep.push(radio.value)
+            }
+        })
+    }
+    return tabRep;
+}
+
+/**
+ * This function is only executed for quizzes with 1 answers per question
+ * It will be executed when you click on the verification button
+ * @returns Place in a table all the answers that the user has to check and return it. 
+ */
+function verification() {
+    let tabRep = tabRepChecked();
+    console.log(tabRep);
+
+    return tabRep;
+}
+
+//Will load the resultat page 
+function openResultatPage() {
+    window.open("resultat.html","_self");
 }
 
 // /!\ FOR QUIZZ WITH ONE ANSWER PER QUESTION : For each question will display the question and its answer 
@@ -115,80 +206,6 @@ function displayQuizz() {
         }
     })
 
-}
-
-/**
- * Checks if the number of answers checked per question is sufficient
- * @param {*} bonneRep //table with all the correct answers
- * @returns boolean True if the number of answers checked for each question is correct
- */
-function checking(bonneRep){
-    let enough = true;
-    let count = 0;
-    for(let i = 0; i < bonneRep.length;i++){
-        document.getElementsByName('choix'+i).forEach(checkbox => {
-            if(checkbox.checked){
-                count++;
-            }
-        })
-        if(bonneRep[i].length != count){
-            enough = false;
-        }
-        count = 0;
-    }
-    return enough;
-}
-
-
-function getMultpleAnswer(tabThem){
-    let checked = [];
-    for(let i =0; i< tabThem.length;i++){
-        document.getElementsByName('choix'+i).forEach(checkbox => {
-            if(checkbox.checked){
-                checked.push(checkbox.value);
-            }
-        })
-    }
-    return checked;
-}
-
-/**
- * 
- * @param {*} tabThem //table with all data
- * @returns //table with all the correct answers
- */
-function getBonneReponse(tabThem){
-    let bonneRep = [];
-    for(let i =0; i< tabThem.length;i++){
-        bonneRep.push(tabThem[i].bonneReponses);
-    }
-    return bonneRep;
-
-}
-
-function tabRepChecked() {
-    let tabRep = [];
-    for(let i = 0;i < quizzes[valeur].data.length;i++){
-        document.getElementsByName('choix'+i).forEach(radio => {
-            if(radio.checked){
-                tabRep.push(radio.value)
-            }
-        })
-    }
-    return tabRep;
-}
-
-function verification() {
-    let tabRep = tabRepChecked();
-    console.log(tabRep);
-
-    return tabRep;
-}
-
-
-//Will load the resultat page 
-function openResultatPage() {
-    window.open("resultat.html","_self");
 }
 
 $(document).ready(function () {
