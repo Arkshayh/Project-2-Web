@@ -124,8 +124,14 @@ function DisplayResultatMultipleAnswer(){
         currentUserRep = [];
         showingAnswer = [];
     }
-    
-    
+}
+
+function DisplayOther(){
+    let tabData = quizzes[valeur].data; 
+    for(const key in quizzes){
+        //à faire :(
+    }
+
 }
 
 /**
@@ -137,7 +143,7 @@ $(document).ready(function () {
         DisplayQuestionAndAnswer();
     }
     else if(typeQuizz == "mix"){
-        
+        DisplayOther();
     }
     else{
         DisplayResultatMultipleAnswer();
