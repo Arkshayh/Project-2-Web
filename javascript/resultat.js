@@ -6,6 +6,8 @@ let valeur = localStorage.getItem('valeur');
 //"true" = multi  "false" = single answer
 let typeQuizz = localStorage.getItem('typeOfQuizz');
 
+let resultat2 = localStorage.getItem('res2');
+
 function DisplaySubTitle(){
     $("main").append('<h2>Correction</h2>');
 }
@@ -133,6 +135,9 @@ $(document).ready(function () {
     DisplaySubTitle();
     if(typeQuizz == "false"){
         DisplayQuestionAndAnswer();
+    }
+    else if(typeQuizz == "mix"){
+        
     }
     else{
         DisplayResultatMultipleAnswer();

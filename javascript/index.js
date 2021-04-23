@@ -15,6 +15,7 @@ function AddThemeInForm() {
     for (const key in quizzes) {
         $("#theme").append('<option value="'+key+'">'+ quizzes[key].title +'</option>');
     }
+    $("#theme").append('<option value="mix">mix</option>')
 }
 
 /**

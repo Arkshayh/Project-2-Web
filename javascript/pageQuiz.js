@@ -5,8 +5,14 @@ let valeur = localStorage.getItem('valeur');
 
 //Will display the title of the quizz and its description
 function DisplayTitle(){
-     $("main").append('<h2>'+ quizzes[valeur].title +'</h2>');
-     $("main").append('<h3>'+ quizzes[valeur].description +'</h3>');
+    if(valeur != "mix"){
+        $("main").append('<h2>'+ quizzes[valeur].title +'</h2>');
+        $("main").append('<h3>'+ quizzes[valeur].description +'</h3>');
+    }
+    else{
+        $("main").append('<h2>Quizz mix</h2>');
+        $("main").append('<h3>Quizz avec des questions aléatoires</h3>');
+    }
 }
 
 //Display the question of the quizz chosen in the console
@@ -27,6 +33,7 @@ function countAnswer(){
         }
     }
 }
+
 
 /**
  * This function is only executed for quizzes with multiple answers per question
@@ -169,44 +176,129 @@ function displayQuizzMultipleAnswer(tabThem){
 
 //Will display the entire page.
 function displayQuizz() {
-    //Check si quizz à choix multiple.
-    countAnswer();
+    
+    if(valeur != "mix"){
+        //Check si quizz à choix multiple.
+        countAnswer();
 
-    let tabThem = quizzes[valeur].data; 
+        let tabThem = quizzes[valeur].data; 
 
-    $("main").append('<div id="QuestionReponse"></div>');
+        $("main").append('<div id="QuestionReponse"></div>');
 
-    if(multipleAnswer == false){
-        displayQuizzUniqueAnswer(tabThem);
-    }
-    else{
-        displayQuizzMultipleAnswer(tabThem);
-    }
-
-    $("main").append('<button id="verification">Vérification</button>')
-    $("#verification").click(function(){
         if(multipleAnswer == false){
-            let resultat = verification();
-            localStorage.setItem("res", resultat);
-            localStorage.setItem("typeOfQuizz", multipleAnswer);
-            openResultatPage();
+             displayQuizzUniqueAnswer(tabThem);
         }
         else{
-            localStorage.setItem("typeOfQuizz", multipleAnswer);
-            let bonneRep = getBonneReponse(tabThem);
-            let enough = checking(bonneRep);
-            if(enough == false){
-                alert("Vous n'avez pas coché assez de case !");
-            }
-            else{
-                let userAnswer = getMultpleAnswer(tabThem);
-                localStorage.setItem("res", userAnswer);
+            displayQuizzMultipleAnswer(tabThem);
+        }
+
+        $("main").append('<button id="verification">Vérification</button>')
+        $("#verification").click(function(){
+            if(multipleAnswer == false){
+                let resultat = verification();
+                localStorage.setItem("res", resultat);
+                localStorage.setItem("typeOfQuizz", multipleAnswer);
                 openResultatPage();
             }
+            else{
+                localStorage.setItem("typeOfQuizz", multipleAnswer);
+                let bonneRep = getBonneReponse(tabThem);
+                let enough = checking(bonneRep);
+                if(enough == false){
+                    alert("Vous n'avez pas coché assez de case !");
+                }
+                else{
+                    let userAnswer = getMultpleAnswer(tabThem);
+                    localStorage.setItem("res", userAnswer);
+                    openResultatPage();
+                }
+            }
+        })
+    }
+    else{
+        let quizzzz = [];
+        let question = [];
+        let answer = [];
+        let multipleanswer = [];
+        let randomData = [];
+        for (const key in quizzes) {
+            quizzzz.push(quizzes[key].data);
         }
-    })
-
+        for(let i = 0; i < quizzzz.length; i++){
+           randomData.push(quizzzz[i][random(0,quizzzz[i].length)])
+           question.push(randomData[i].question);  
+           answer.push(randomData[i].reponses);
+           if(randomData[i].bonneReponses.length > 1){
+                multipleanswer.push(true);
+           }
+           else{
+                multipleanswer.push(false);
+           }
+        }
+        displayMix(question, answer, multipleanswer);
+        $("main").append('<button id="verification">Vérification</button>');
+        let resultat = verification();
+        localStorage.setItem("res", resultat);
+        let bonneRep = getBonneReponse(tabThem);
+        let enough = checking(bonneRep);
+        localStorage.setItem("typeOfQuizz", "mix");
+        if(enough == false){
+            alert("Vous n'avez pas coché assez de case !");
+        }
+        else{
+            let userAnswer = getMultpleAnswer(tabThem);
+            localStorage.setItem("res2", userAnswer);
+            openResultatPage();
+        }
+    }
 }
+
+function displayMix(question, answer, multipleanswer) {
+    $("main").append('<div id="QuestionReponse"></div>');
+    console.log(answer)
+    let data;
+    let i = 0;
+    for(const key in quizzes){
+        data = quizzes[key].data;
+        $("#QuestionReponse").append('<img src="'+data[i].image+'"alt="image">');
+        $("#QuestionReponse").append('<div id ="Question'+ (i+1) +'"> Question numéro '+ (i+1) +
+            ' : '+ question[i] +'</div');
+        if(multipleanswer[i] == false){
+            mixUnique(i, answer[i]);
+        }else{
+            mixMultiple(i, answer[i]);
+        }
+        i++;
+    }
+    
+}
+
+function mixMultiple(i, answer){
+    for(let j = 0; j < answer.length;j++){
+        $("#Question"+(i+1)).append('<div class ="Reponse"> <input type="checkbox" id ="'+ answer[j] +'" name="choix'+ i +'" value="'+
+         j +'"> <label for="'+ answer[j] +'">'+ answer[j] +'</label> </div>');
+    }
+    $("#QuestionReponse").append('<br>');
+}
+
+function mixUnique(i, answer) {
+    let val = i +1;
+    for(let j = 0; j < answer.length;j++){
+            if(j == 0){
+                $("#Question"+val).append('<div class ="Reponse"> <input type="radio" id ="'+ answer[j] +'" name="choix'+ i +'" value="'+
+             j +'" checked> <label for="'+ answer[j] +'">'+ answer[j] +'</label> </div>');
+            }
+            else{
+                $("#Question"+val).append('<div class ="Reponse"> <input type="radio" id ="'+ answer[j] +'" name="choix'+ i +'" value="'+
+             j +'"> <label for="'+ answer[j] +'">'+ answer[j] +'</label> </div>');
+            }
+        }
+        $("#QuestionReponse").append('<br>');
+}
+
+function random(min, max) {
+    return Math.floor(Math.random() * (max - min)) + min;
+  }
 
 $(document).ready(function () {
     DisplayTitle(valeur);
